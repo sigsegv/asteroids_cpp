@@ -1,9 +1,9 @@
 #pragma once
 
 #include <memory>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
+#include "Scab.hpp"
 #include "KinematicBody.hpp"
+#include "CircleCollider.hpp"
 
 /**
 	* Object in SceneGraph
@@ -20,8 +20,10 @@ public:
 	Ptr detachNode(const GameObject& child);
 
 	virtual void update(float elapsedSeconds);
+	virtual void onCollision(GameObject& other);
 
 	KinematicBody::Ptr kinematicBody;
+	CircleCollider::Ptr collider;
 protected:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 	virtual void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;

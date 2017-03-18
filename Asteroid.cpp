@@ -10,13 +10,17 @@ Asteroid::Asteroid()
 	setOrigin(bounds.width / 2.f, bounds.height / 2.f);
 	setScale({ scale, scale });
 	setPosition(100.f, 100.f);
+
 	kinematicBody.reset(new KinematicBody(*this));
 	Game::instance->kinematicSystem.addBody(*kinematicBody);
 	kinematicBody->velocity = sf::Vector2f(-50.0f, -50.0f);
 	kinematicBody->rotationalVelocity = 10.0f;
+
+	collider.reset(new CircleCollider(*this, 25.0));
+	Game::instance->collisionSystem.addCollider(*collider);
 }
 
-void Asteroid::update(float elapsedSeconds)
+void Asteroid::update(float /*elapsedSeconds*/)
 {
 	if (!Game::instance->insideBounds(getPosition()))
 	{

@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Scab.hpp"
 #include "KinematicSystem.hpp"
+#include "CollisionSystem.hpp"
 #include "GameObject.hpp"
 
 class Game
@@ -28,6 +29,7 @@ public:
 	sf::Vector2f warpAround(const sf::Vector2f& position) const;
 
 	KinematicSystem kinematicSystem;
+	CollisionSystem collisionSystem;
 private:
 	sf::RenderWindow mWindow;
 	GameObject mRoot;

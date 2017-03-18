@@ -54,6 +54,10 @@ void GameObject::update(float elpasedSeconds)
 	}
 }
 
-void GameObject::updateCurrent(float elapsedSeconds)
+void GameObject::onCollision(GameObject & /*other*/)
+{
+}
+
+void GameObject::updateCurrent(float /*elapsedSeconds*/)
 {
 }
