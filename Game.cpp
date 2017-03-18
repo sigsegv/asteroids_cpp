@@ -1,6 +1,6 @@
 #include "Game.hpp"
 #include "Player.hpp"
-#include "Util.hpp"
+#include "Asteroid.hpp"
 
 Game* Game::instance = 0;
 
@@ -12,11 +12,13 @@ Game::Game()
 void Game::run()
 {
 	mWindow.create(sf::VideoMode(640, 480), "SFML Application");
-	mPlayBounds.width = scab::Float(mWindow.getSize().x);
-	mPlayBounds.height = scab::Float(mWindow.getSize().y);
+	mPlayBounds.width = Float(mWindow.getSize().x);
+	mPlayBounds.height = Float(mWindow.getSize().y);
 
 	Player::Ptr player(new Player());
 	mRoot.attachNode(std::move(player));
+
+	mRoot.attachNode(Asteroid::Ptr(new Asteroid()));
 
 	sf::Clock clock;
 	sf::Time kTimePerFrame = sf::milliseconds(17); // 60 FPS

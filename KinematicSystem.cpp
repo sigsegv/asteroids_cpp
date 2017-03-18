@@ -11,6 +11,7 @@ void KinematicSystem::update(float elapsedSeconds) const
 	{
 		const sf::Vector2f delta(body->velocity * elapsedSeconds);
 		body->parent.move(delta);
+		body->parent.rotate(body->rotationalVelocity * elapsedSeconds);
 	}
 }
 

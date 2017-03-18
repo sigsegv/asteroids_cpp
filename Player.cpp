@@ -12,10 +12,14 @@ Player::Player() :
 	mTexture.loadFromFile("assets/textures/playerShip1_green.png");
 	mSprite.setTexture(mTexture);
 	sf::FloatRect bounds = mSprite.getLocalBounds();
-	const float scale = scab::calcScaleFactor<float>(bounds, { 0.0, 0.0, 20.0, 20.0 });
+	const float scale = calcScaleFactor<float>(bounds, { 0.0, 0.0, 20.0, 20.0 });
 	setOrigin(bounds.width / 2.f, bounds.height / 2.f);
 	setScale({ scale, scale });
 	setPosition(200.f, 200.f);
+}
+
+Player::~Player()
+{
 }
 
 void Player::update(float elapsedSeconds)

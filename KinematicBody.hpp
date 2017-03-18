@@ -7,13 +7,14 @@
 class KinematicBody : private sf::NonCopyable
 {
 public:
-	typedef std::unique_ptr<KinematicBody> Ptr;
+	using Ptr = std::unique_ptr<KinematicBody>;
 
-	KinematicBody(GameObject& parent) : parent(parent)
+	KinematicBody(GameObject& parent) : parent(parent), rotationalVelocity(0.0f)
 	{
 
 	}
 
 	GameObject& parent;
+	float rotationalVelocity;
 	sf::Vector2f velocity;
 };

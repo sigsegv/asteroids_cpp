@@ -1,6 +1,7 @@
 #include "GameObject.hpp"
 #include <algorithm>
 #include <cassert>
+#include "Game.hpp"
 
 GameObject::GameObject() :
 	mParent(nullptr)
@@ -9,6 +10,10 @@ GameObject::GameObject() :
 
 GameObject::~GameObject()
 {
+	if (kinematicBody.get())
+	{
+		Game::instance->kinematicSystem.removeBody(*kinematicBody);
+	}
 }
 
 void GameObject::attachNode(Ptr child)

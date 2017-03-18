@@ -4,8 +4,6 @@
 #include <limits>
 #include <SFML/Graphics.hpp>
 
-namespace scab
-{
 /**
 	* Returns the scale factor needed to scale original to desired, while preserving the aspect ratio
 	*/
@@ -42,4 +40,4 @@ inline float Float(unsigned int v)
 	return static_cast<float>(v);
 }
 #endif
-}
+
