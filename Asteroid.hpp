@@ -6,12 +6,16 @@
 class Asteroid : public GameObject
 {
 public:
-	Asteroid();
+	enum class Size { small, large };
 
-	virtual void update(float elapsedSeconds);
+	Asteroid(Size size);
+
+	virtual void onCollision(GameObject& other) override;
+	virtual void update(float elapsedSeconds) override;
 protected:
 	virtual void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
 private:
+	Size mSize;
 	sf::Texture mTexture;
 	sf::Sprite mSprite;
 };

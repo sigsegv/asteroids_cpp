@@ -1,7 +1,8 @@
 #include "Asteroid.hpp"
 #include "Game.hpp"
 
-Asteroid::Asteroid()
+Asteroid::Asteroid(Size size) :
+	mSize(size)
 {
 	mTexture.loadFromFile("assets/textures/meteorGrey_big1.png");
 	mSprite.setTexture(mTexture);
@@ -18,6 +19,10 @@ Asteroid::Asteroid()
 
 	collider.reset(new CircleCollider(*this, 25.0));
 	Game::instance->collisionSystem.addCollider(*collider);
+}
+
+void Asteroid::onCollision(GameObject & other)
+{
 }
 
 void Asteroid::update(float /*elapsedSeconds*/)
