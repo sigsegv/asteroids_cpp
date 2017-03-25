@@ -1,7 +1,8 @@
 #include "Asteroid.hpp"
 #include "Game.hpp"
 
-Asteroid::Asteroid()
+Asteroid::Asteroid(Size size) :
+	mSize(size)
 {
 	mTexture.loadFromFile("assets/textures/meteorGrey_big1.png");
 	mSprite.setTexture(mTexture);
@@ -16,7 +17,15 @@ Asteroid::Asteroid()
 	kinematicBody->rotationalVelocity = 10.0f;
 }
 
+<<<<<<< Updated upstream
 void Asteroid::update(float elapsedSeconds)
+=======
+void Asteroid::onCollision(GameObject & other)
+{
+}
+
+void Asteroid::update(float /*elapsedSeconds*/)
+>>>>>>> Stashed changes
 {
 	if (!Game::instance->insideBounds(getPosition()))
 	{
