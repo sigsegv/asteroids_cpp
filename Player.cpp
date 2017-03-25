@@ -20,7 +20,7 @@ Player::Player() :
 	const float scale = calcScaleFactor<float>(bounds, { 0.0, 0.0, 20.0, 20.0 });
 	setOrigin(bounds.width / 2.f, bounds.height / 2.f);
 	setScale({ scale, scale });
-	setPosition(200.f, 200.f);
+	setPosition(Game::instance->getBounds().width / 2.0f, Game::instance->getBounds().height / 2.0f);
 }
 
 Player::~Player()

@@ -61,6 +61,11 @@ void Game::render()
 	mWindow.display();
 }
 
+const sf::FloatRect& Game::getBounds() const
+{
+	return mPlayBounds;
+}
+
 bool Game::insideBounds(const sf::Vector2f & position) const
 {
 	return mPlayBounds.contains(position);

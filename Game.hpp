@@ -19,6 +19,7 @@ public:
 	void processEvents();
 	void render();
 
+	const sf::FloatRect& getBounds() const;
 	/**
 	 * return true of position outside of bound areas
 	 */
