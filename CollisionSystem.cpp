@@ -17,6 +17,8 @@ void CollisionSystem::removeCollider(CircleCollider & collider)
 
 void CollisionSystem::check()
 {
+	if (mColliders.size() < 2) return;
+
 	Colliders temp(mColliders); // make copy so colliders can get removed
 	Colliders::iterator active = temp.begin(), end = temp.end();
 	for (; active != end; ++active)
