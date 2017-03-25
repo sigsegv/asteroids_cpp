@@ -2,6 +2,7 @@
 #include "Game.hpp"
 #include "Util.hpp"
 #include "KinematicBody.hpp"
+#include "CollisionSystem.hpp"
 
 Player::Player() :
 	mRotationSpeed(180.0f),
@@ -9,6 +10,10 @@ Player::Player() :
 {
 	kinematicBody.reset(new KinematicBody(*this));
 	Game::instance->kinematicSystem.addBody(*kinematicBody);
+
+	collider.reset(new CircleCollider(*this, 10.0));
+	Game::instance->collisionSystem.addCollider(*collider);
+
 	mTexture.loadFromFile("assets/textures/playerShip1_green.png");
 	mSprite.setTexture(mTexture);
 	sf::FloatRect bounds = mSprite.getLocalBounds();
@@ -47,6 +52,11 @@ void Player::update(float elapsedSeconds)
 	{
 		setPosition(Game::instance->warpAround(getPosition()));
 	}
+}
+
+void Player::onCollision(GameObject & /*other*/)
+{
+	
 }
 
 void Player::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const

@@ -2,7 +2,6 @@
 
 #include <cassert>
 #include <limits>
-#include <SFML/Graphics.hpp>
 
 /**
 	* Returns the scale factor needed to scale original to desired, while preserving the aspect ratio
@@ -15,6 +14,13 @@ float calcScaleFactor(const sf::Rect<T>& original, const sf::Rect<T>& desired)
 	const float scale_x = desired.width / original.width;
 	const float scale_y = desired.height / original.height;
 	return std::max(scale_x, scale_y);
+}
+
+template<typename T>
+float calcDistance(const sf::Vector2<T>& a, const sf::Vector2<T>& b)
+{
+	const sf::Vector2<T> delta(b - a);
+	return std::sqrt(delta.x * delta.x + delta.y * delta.y);
 }
 
 template<typename T>

@@ -39,6 +39,7 @@ void Game::run()
 void Game::update(const sf::Time& elapsedTime)
 {
 	const float elapsedSeconds = elapsedTime.asSeconds();
+	collisionSystem.check();
 	kinematicSystem.update(elapsedSeconds);
 	mRoot.update(elapsedSeconds);
 }
