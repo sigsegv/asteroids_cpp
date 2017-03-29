@@ -12,10 +12,10 @@ public:
 	Player();
 	~Player();
 
-	void update(float elapsedSeconds) override;
 	void onCollision(GameObject& other) override;
 protected:
 	virtual void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
+	virtual void updateCurrent(float elapsedSeconds) override;
 private:
 	float mRotationSpeed;
 	float mMainThruster;

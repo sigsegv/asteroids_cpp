@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <list>
 #include "Scab.hpp"
 #include "KinematicBody.hpp"
 #include "CircleCollider.hpp"
@@ -18,8 +19,14 @@ public:
 
 	void attachNode(Ptr child);
 	Ptr detachNode(const GameObject& child);
+	void update(float elapsedSeconds);
+	sf::Transform getWorldTransform() const;
+	sf::Vector2f getWorldPosition() const;
+	float getWorldRotation() const;
+	bool isMarkedForRemoval() const;
+	void markForRemoval();
+	void cleanup();
 
-	virtual void update(float elapsedSeconds);
 	virtual void onCollision(GameObject& other);
 
 	KinematicBody::Ptr kinematicBody;
@@ -27,8 +34,10 @@ public:
 protected:
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 	virtual void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const;
-	void updateCurrent(float elapsedSeconds);
-private:
+	virtual void updateCurrent(float elapsedSeconds);
+
 	GameObject* mParent;
-	std::vector<Ptr> mChildren;
+	bool mMarkedForRemoval;
+	std::list<Ptr> mChildren;
+private:
 };

@@ -1,10 +1,12 @@
 #include "GameObject.hpp"
-#include <algorithm>
 #include <cassert>
+#include <algorithm>
+#include <functional>
 #include "Game.hpp"
 
 GameObject::GameObject() :
-	mParent(nullptr)
+	mParent(nullptr),
+	mMarkedForRemoval(false)
 {
 }
 
@@ -19,7 +21,7 @@ GameObject::~GameObject()
 void GameObject::attachNode(Ptr child)
 {
 	child->mParent = this;
-	mChildren.push_back(std::move(child));
+	mChildren.push_front(std::move(child));
 }
 
 GameObject::Ptr GameObject::detachNode(const GameObject & child)
@@ -27,7 +29,6 @@ GameObject::Ptr GameObject::detachNode(const GameObject & child)
 	auto found = std::find_if(mChildren.begin(), mChildren.end(), [&](const Ptr& p)->bool { return p.get() == &child; });
 	assert(found != mChildren.end());
 	Ptr result = std::move(*found);
-	mChildren.erase(found);
 	result->mParent = nullptr;
 	return result;
 }
@@ -52,6 +53,44 @@ void GameObject::update(float elpasedSeconds)
 	{
 		child->update(elpasedSeconds);
 	}
+}
+
+sf::Transform GameObject::getWorldTransform() const
+{
+	sf::Transform transform = sf::Transform::Identity;
+	for (const GameObject* node = this; node != nullptr; node = node->mParent)
+	{
+		transform = node->getTransform() * transform;
+	}
+	return transform;
+}
+
+sf::Vector2f GameObject::getWorldPosition() const
+{
+	return getWorldTransform() * sf::Vector2f();
+}
+
+float GameObject::getWorldRotation() const
+{
+	return Vector2Utilf::angle(getWorldPosition());
+}
+
+bool GameObject::isMarkedForRemoval() const
+{
+	return mMarkedForRemoval;
+}
+
+void GameObject::markForRemoval()
+{
+	mMarkedForRemoval = true;
+}
+
+void GameObject::cleanup()
+{
+	if (mChildren.empty()) return;
+	auto beginCleanup = std::remove_if(mChildren.begin(), mChildren.end(), std::mem_fn(&GameObject::isMarkedForRemoval));
+	mChildren.erase(beginCleanup, mChildren.end());
+	std::for_each(mChildren.begin(), mChildren.end(), std::mem_fn(&GameObject::cleanup));
 }
 
 void GameObject::onCollision(GameObject & /*other*/)

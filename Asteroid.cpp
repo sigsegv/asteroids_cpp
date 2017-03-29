@@ -21,11 +21,11 @@ Asteroid::Asteroid(Size size) :
 	Game::instance->collisionSystem.addCollider(*collider);
 }
 
-void Asteroid::onCollision(GameObject & other)
+void Asteroid::onCollision(GameObject & /*other*/)
 {
 }
 
-void Asteroid::update(float /*elapsedSeconds*/)
+void Asteroid::updateCurrent(float /*elapsedSeconds*/)
 {
 	if (!Game::instance->insideBounds(getPosition()))
 	{

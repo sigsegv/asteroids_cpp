@@ -39,9 +39,10 @@ void Game::run()
 void Game::update(const sf::Time& elapsedTime)
 {
 	const float elapsedSeconds = elapsedTime.asSeconds();
-	collisionSystem.check();
+	//collisionSystem.check();
 	kinematicSystem.update(elapsedSeconds);
 	mRoot.update(elapsedSeconds);
+	mRoot.cleanup();
 }
 
 void Game::processEvents()
@@ -92,3 +93,14 @@ sf::Vector2f Game::warpAround(const sf::Vector2f & position) const
 	assert(false);
 	return position;
 }
+
+void Game::attachNode(GameObject::Ptr object)
+{
+	mRoot.attachNode(std::move(object));
+}
+
+GameObject::Ptr Game::detachNode(const GameObject & object)
+{
+	return std::move(mRoot.detachNode(object));
+}
+
