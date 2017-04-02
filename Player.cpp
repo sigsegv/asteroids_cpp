@@ -24,7 +24,7 @@ Player::Player() :
 	setPosition(Game::instance->getBounds().width / 2.0f, Game::instance->getBounds().height / 2.0f);
 
 	Canon::Ptr canon(new Canon());
-	canon->setPosition(0.0, 20.0); // place canon at nose
+	canon->setPosition(bounds.width / 2.f, -bounds.height / 2.f); // place canon at nose
 	attachNode(std::move(canon));
 }
 

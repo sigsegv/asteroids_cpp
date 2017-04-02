@@ -88,7 +88,8 @@ public:
 	 */
 	static real_t angle(const sf::Vector2<T>& v)
 	{
-		return std::atan(v.y / v.x);
+		const sf::Vector2<T> u = unit(v);
+		return std::atan(u.y / u.x);
 	}
 
 	/**

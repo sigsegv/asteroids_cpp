@@ -72,7 +72,12 @@ sf::Vector2f GameObject::getWorldPosition() const
 
 float GameObject::getWorldRotation() const
 {
-	return Vector2Utilf::angle(getWorldPosition());
+	float angle = 0.0;
+	for (const GameObject* node = this; node != nullptr; node = node->mParent)
+	{
+		angle += node->getRotation();
+	}
+	return angle;
 }
 
 bool GameObject::isMarkedForRemoval() const

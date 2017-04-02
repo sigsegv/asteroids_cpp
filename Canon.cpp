@@ -22,12 +22,16 @@ void Canon::updateCurrent(float elapsedSeconds)
 		if (mCoolDown == 0.0)
 		{
 			GameObject::Ptr projectile(new Projectile());
+			// position and direct projectile
 			projectile->setPosition(getWorldPosition());
 			projectile->setRotation(getWorldRotation());
-			const float deg_rotation = projectile->getRotation();
-			const float rad_rotation = deg_rotation / 180.0 * M_PI;
-			sf::Vector2f velocity = Vector2Utilf::fromAngle(rad_rotation);
-			velocity = velocity * sVelocity;
+			// get ships velocity
+			const sf::Vector2f parentVelocity = mParent->kinematicBody->velocity;
+			// calc velocity
+			sf::Transform transform;
+			transform.rotate(projectile->getRotation());
+			const sf::Vector2f direction = transform.transformPoint({ 0.0, -1.0 });
+			const sf::Vector2f velocity = parentVelocity + (direction * sVelocity);
 			projectile->kinematicBody->velocity = velocity;
 			Game::instance->attachNode(std::move(projectile));
 			mCoolDown = sCoolDown;
