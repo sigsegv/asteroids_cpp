@@ -10,7 +10,7 @@ public:
 
 	Asteroid(Size size);
 
-	virtual void onCollision(GameObject& other) override;
+	virtual void onCollision(const Collision& other) override;
 protected:
 	virtual void updateCurrent(float elapsedSeconds) override;
 	virtual void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;

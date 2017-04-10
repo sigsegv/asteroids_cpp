@@ -19,6 +19,8 @@ void CollisionSystem::check()
 {
 	if (mColliders.size() < 2) return;
 
+	std::vector<Collision::Ptr> collisions;
+
 	Colliders temp(mColliders); // make copy so colliders can get removed
 	Colliders::iterator active = temp.begin(), end = temp.end();
 	for (; active != end; ++active)
@@ -33,9 +35,14 @@ void CollisionSystem::check()
 			const float distance = calcDistance(activeColliderCentre, otherColliderCentre);
 			if (distance < activeCollider.radius + otherCollider.radius)
 			{
-				activeCollider.parent.onCollision(otherCollider.parent);
-				otherCollider.parent.onCollision(activeCollider.parent);
+				Collision::Ptr collision(new Collision(activeCollider.parent, otherCollider.parent, sf::Vector2f()));
+				collisions.push_back(std::move(collision));
 			}
 		}
+	}
+	for (Collision::Ptr& collision : collisions)
+	{
+		collision->gameObject1.onCollision(*collision);
+		collision->gameObject2.onCollision(*collision);
 	}
 }

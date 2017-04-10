@@ -21,7 +21,7 @@ Asteroid::Asteroid(Size size) :
 	Game::instance->collisionSystem.addCollider(*collider);
 }
 
-void Asteroid::onCollision(GameObject & /*other*/)
+void Asteroid::onCollision(const Collision& /*collision*/)
 {
 }
 

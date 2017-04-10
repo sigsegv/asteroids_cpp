@@ -27,7 +27,7 @@ public:
 	void markForRemoval();
 	void cleanup();
 
-	virtual void onCollision(GameObject& other);
+	virtual void onCollision(const Collision& collision);
 
 	KinematicBody::Ptr kinematicBody;
 	CircleCollider::Ptr collider;

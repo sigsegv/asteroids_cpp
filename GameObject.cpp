@@ -98,7 +98,7 @@ void GameObject::cleanup()
 	std::for_each(mChildren.begin(), mChildren.end(), std::mem_fn(&GameObject::cleanup));
 }
 
-void GameObject::onCollision(GameObject & /*other*/)
+void GameObject::onCollision(const Collision& /*other*/)
 {
 }
 

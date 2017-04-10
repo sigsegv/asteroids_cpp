@@ -12,7 +12,7 @@ public:
 	Player();
 	~Player();
 
-	void onCollision(GameObject& other) override;
+	void onCollision(const Collision& other) override;
 protected:
 	virtual void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
 	virtual void updateCurrent(float elapsedSeconds) override;

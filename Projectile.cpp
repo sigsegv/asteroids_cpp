@@ -18,7 +18,7 @@ Projectile::Projectile()
 	setScale({ scale, scale });
 }
 
-void Projectile::onCollision(GameObject & other)
+void Projectile::onCollision(const Collision& /*collision*/)
 {
 	
 }

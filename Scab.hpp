@@ -3,6 +3,7 @@
 class GameObject;
 class KinematicBody;
 class KinematicSystem;
+class Collision;
 
 using real_t = float;
 

@@ -59,7 +59,7 @@ void Player::updateCurrent(float elapsedSeconds)
 	}
 }
 
-void Player::onCollision(GameObject & /*other*/)
+void Player::onCollision(const Collision& /*collision*/)
 {
 	
 }

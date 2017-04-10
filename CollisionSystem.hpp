@@ -2,7 +2,7 @@
 
 #include <list>
 #include "Scab.hpp"
-#include "CircleCollider.hpp"
+#include "Collision.hpp"
 
 class CollisionSystem
 {
