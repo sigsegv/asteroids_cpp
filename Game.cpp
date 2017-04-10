@@ -18,7 +18,7 @@ void Game::run()
 	Player::Ptr player(new Player());
 	mRoot.attachNode(std::move(player));
 
-	//mRoot.attachNode(Asteroid::Ptr(new Asteroid()));
+	mRoot.attachNode(Asteroid::Ptr(new Asteroid(Asteroid::Size::small)));
 
 	sf::Clock clock;
 	sf::Time kTimePerFrame = sf::milliseconds(17); // 60 FPS
@@ -39,7 +39,7 @@ void Game::run()
 void Game::update(const sf::Time& elapsedTime)
 {
 	const float elapsedSeconds = elapsedTime.asSeconds();
-	//collisionSystem.check();
+	collisionSystem.check();
 	kinematicSystem.update(elapsedSeconds);
 	mRoot.update(elapsedSeconds);
 	mRoot.cleanup();

@@ -20,7 +20,7 @@ Projectile::Projectile()
 
 void Projectile::onCollision(const Collision& /*collision*/)
 {
-	
+	markForRemoval();
 }
 
 void Projectile::updateCurrent(float elapsedSeconds)

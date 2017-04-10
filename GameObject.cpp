@@ -16,6 +16,10 @@ GameObject::~GameObject()
 	{
 		Game::instance->kinematicSystem.removeBody(*kinematicBody);
 	}
+	if (collider.get())
+	{
+		Game::instance->collisionSystem.removeCollider(*collider);
+	}
 }
 
 void GameObject::attachNode(Ptr child)
