@@ -18,7 +18,7 @@ void Game::run()
 	Player::Ptr player(new Player());
 	mRoot.attachNode(std::move(player));
 
-	//mRoot.attachNode(Asteroid::Ptr(new Asteroid()));
+	mRoot.attachNode(Asteroid::Ptr(new Asteroid(Asteroid::Size::small)));
 
 	sf::Clock clock;
 	sf::Time kTimePerFrame = sf::milliseconds(17); // 60 FPS
@@ -42,6 +42,7 @@ void Game::update(const sf::Time& elapsedTime)
 	collisionSystem.check();
 	kinematicSystem.update(elapsedSeconds);
 	mRoot.update(elapsedSeconds);
+	mRoot.cleanup();
 }
 
 void Game::processEvents()
@@ -59,6 +60,11 @@ void Game::render()
 	mWindow.clear();
 	mWindow.draw(mRoot);
 	mWindow.display();
+}
+
+const sf::FloatRect& Game::getBounds() const
+{
+	return mPlayBounds;
 }
 
 bool Game::insideBounds(const sf::Vector2f & position) const
@@ -87,3 +93,14 @@ sf::Vector2f Game::warpAround(const sf::Vector2f & position) const
 	assert(false);
 	return position;
 }
+
+void Game::attachNode(GameObject::Ptr object)
+{
+	mRoot.attachNode(std::move(object));
+}
+
+GameObject::Ptr Game::detachNode(const GameObject & object)
+{
+	return std::move(mRoot.detachNode(object));
+}
+

@@ -19,6 +19,7 @@ public:
 	void processEvents();
 	void render();
 
+	const sf::FloatRect& getBounds() const;
 	/**
 	 * return true of position outside of bound areas
 	 */
@@ -28,10 +29,13 @@ public:
 	 */
 	sf::Vector2f warpAround(const sf::Vector2f& position) const;
 
+	void attachNode(GameObject::Ptr object);
+	GameObject::Ptr detachNode(const GameObject& object);
+
 	KinematicSystem kinematicSystem;
 	CollisionSystem collisionSystem;
 private:
-	sf::RenderWindow mWindow;
 	GameObject mRoot;
+	sf::RenderWindow mWindow;
 	sf::FloatRect mPlayBounds;
 };

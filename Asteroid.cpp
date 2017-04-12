@@ -4,10 +4,20 @@
 Asteroid::Asteroid(Size size) :
 	mSize(size)
 {
-	mTexture.loadFromFile("assets/textures/meteorGrey_big1.png");
+	float gameSize = 1.0;
+	if (size == Asteroid::Size::small)
+	{
+		mTexture.loadFromFile("assets/textures/meteorGrey_small2.png");
+		gameSize = 15.0;
+	}
+	else
+	{
+		mTexture.loadFromFile("assets/textures/meteorGrey_big1.png");
+		gameSize = 50.0;
+	}
 	mSprite.setTexture(mTexture);
 	sf::FloatRect bounds = mSprite.getLocalBounds();
-	const float scale = calcScaleFactor<float>(bounds, { 0.0, 0.0, 50.0, 50.0 });
+	const float scale = calcScaleFactor<float>(bounds, { 0.0, 0.0, gameSize, gameSize });
 	setOrigin(bounds.width / 2.f, bounds.height / 2.f);
 	setScale({ scale, scale });
 	setPosition(100.f, 100.f);
@@ -17,15 +27,16 @@ Asteroid::Asteroid(Size size) :
 	kinematicBody->velocity = sf::Vector2f(-50.0f, -50.0f);
 	kinematicBody->rotationalVelocity = 10.0f;
 
-	collider.reset(new CircleCollider(*this, 25.0));
+	collider.reset(new CircleCollider(*this, gameSize));
 	Game::instance->collisionSystem.addCollider(*collider);
 }
 
-void Asteroid::onCollision(GameObject & other)
+void Asteroid::onCollision(const Collision& /*collision*/)
 {
+	markForRemoval();
 }
 
-void Asteroid::update(float /*elapsedSeconds*/)
+void Asteroid::updateCurrent(float /*elapsedSeconds*/)
 {
 	if (!Game::instance->insideBounds(getPosition()))
 	{
