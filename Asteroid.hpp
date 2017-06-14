@@ -11,11 +11,15 @@ public:
 	Asteroid(Size size);
 
 	virtual void onCollision(const Collision& other) override;
+
+	static Asteroid::Ptr Asteroid::createAsteroid(const sf::Vector2f& position, const sf::Vector2f& velocity, real_t rotational_velocity, Asteroid::Size sz);
 protected:
 	virtual void updateCurrent(float elapsedSeconds) override;
 	virtual void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
 private:
-	Size mSize;
+	const Size mSize;
 	sf::Texture mTexture;
 	sf::Sprite mSprite;
+
+	void breakupAsteroid();
 };
