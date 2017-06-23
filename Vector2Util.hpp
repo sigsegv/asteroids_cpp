@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <cmath>
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <ostream>
@@ -55,7 +56,7 @@ public:
 	*/
 	static constexpr sf::Vector2<T> normal(const sf::Vector2<T>& v) noexcept
 	{
-		return sf::Vector2{ -v.y, v.x };
+		return sf::Vector2<T>{ -v.y, v.x };
 	}
 
 	/**
