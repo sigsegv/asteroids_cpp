@@ -2,9 +2,10 @@
 
 #include <cassert>
 #include <limits>
+#include "Scab.hpp"
 #include "Vector2Util.hpp"
 
-using Vector2Utilf = Vector2Util<float>;
+using Vector2Utilf = Vector2Util<float>; 
 
 /**
 	* Returns the scale factor needed to scale original to desired, while preserving the aspect ratio

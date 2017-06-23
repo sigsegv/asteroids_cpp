@@ -1,6 +1,12 @@
 #include "Game.hpp"
 #include "Player.hpp"
 #include "Asteroid.hpp"
+#include "Util.hpp"
+
+namespace
+{
+
+}
 
 Game* Game::instance = 0;
 
@@ -18,7 +24,10 @@ void Game::run()
 	Player::Ptr player(new Player());
 	mRoot.attachNode(std::move(player));
 
-	mRoot.attachNode(Asteroid::Ptr(new Asteroid(Asteroid::Size::small)));
+	
+	mRoot.attachNode(Asteroid::createAsteroid({ 100.0, 100.0 }, { -50.0, -50.0 }, 10.0, Asteroid::Size::large));
+	mRoot.attachNode(Asteroid::createAsteroid({ 500.0, 500.0 }, { 50.0, -50.0 }, 10.0, Asteroid::Size::large));
+	mRoot.attachNode(Asteroid::createAsteroid({ 300.0, 300.0 }, { 50.0, 50.0 }, 10.0, Asteroid::Size::large));
 
 	sf::Clock clock;
 	sf::Time kTimePerFrame = sf::milliseconds(17); // 60 FPS
@@ -74,19 +83,20 @@ bool Game::insideBounds(const sf::Vector2f & position) const
 
 sf::Vector2f Game::warpAround(const sf::Vector2f & position) const
 {
-	if (position.x < mPlayBounds.left)
+	// warp even if on edge
+	if (position.x <= mPlayBounds.left)
 	{
 		return{ mPlayBounds.width,position.y };
 	}
-	if (position.x > mPlayBounds.left + mPlayBounds.width)
+	if (position.x >= mPlayBounds.left + mPlayBounds.width)
 	{
 		return{ mPlayBounds.left,position.y };
 	}
-	if (position.y < mPlayBounds.top)
+	if (position.y <= mPlayBounds.top)
 	{
 		return{position.x, mPlayBounds.top + mPlayBounds.height };
 	}
-	if (position.y > mPlayBounds.top + mPlayBounds.height)
+	if (position.y >= mPlayBounds.top + mPlayBounds.height)
 	{
 		return{ position.x, mPlayBounds.top };
 	}
