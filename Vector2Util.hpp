@@ -96,7 +96,7 @@ public:
 	 * Return unit vector representing a rotation of angle
 	 * @param angle in radians
 	 */
-	static sf::Vector2<T> fromAngle(real_t angle)
+	static constexpr sf::Vector2<T> fromAngle(real_t angle)
 	{
 		return{std::cos(angle), std::sin(angle)};
 	}
