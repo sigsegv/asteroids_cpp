@@ -5,7 +5,12 @@ set(PROJECT_NAME scab)
 
 project(${PROJECT_NAME} VERSION 0.0.0.1 LANGUAGES CXX)
 
+###################################################
+# Set local settings, such as SFML_ROOT in this file
 include(local_settings.cmake OPTIONAL)
+###################################################
+
+option(SCAB_STATIC "Whether to link statically or not" ON)
 
 if(${APPLE})
   message("Apple")
@@ -22,6 +27,9 @@ file(GLOB HDR *.hpp)
 file(GLOB SRC *.cpp)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+if(${SCAB_STATIC})
+  set(SFML_STATIC_LIBRARIES TRUE)
+endif()
 find_package(SFML 2 REQUIRED graphics window system)
 
 add_executable(${PROJECT_NAME} ${SRC} ${HDR})
