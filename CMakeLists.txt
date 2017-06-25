@@ -10,7 +10,11 @@ project(${PROJECT_NAME} VERSION 0.0.0.1 LANGUAGES CXX)
 include(local_settings.cmake OPTIONAL)
 ###################################################
 
-option(SCAB_STATIC "Whether to link statically or not" ON)
+if(${MSVC})
+  option(SCAB_STATIC "Whether to link statically or not" ON)
+else()
+  option(SCAB_STATIC "Whether to link statically or not" OFF)
+endif()
 
 if(${APPLE})
   message("Apple")
@@ -35,4 +39,4 @@ find_package(SFML 2 REQUIRED graphics window system)
 add_executable(${PROJECT_NAME} ${SRC} ${HDR})
 target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 target_include_directories(${PROJECT_NAME} PUBLIC ${SFML_INCLUDE_DIR})
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/assets)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/assets)
