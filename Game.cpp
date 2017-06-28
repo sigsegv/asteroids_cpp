@@ -111,6 +111,6 @@ void Game::attachNode(GameObject::Ptr object)
 
 GameObject::Ptr Game::detachNode(const GameObject & object)
 {
-	return std::move(mRoot.detachNode(object));
+	return mRoot.detachNode(object);
 }
 

@@ -63,7 +63,7 @@ Asteroid::Ptr Asteroid::createAsteroid(const sf::Vector2f& position, const sf::V
 	asteroid->setPosition(position);
 	asteroid->kinematicBody->velocity = velocity;
 	asteroid->kinematicBody->rotationalVelocity = rotational_velocity;
-	return std::move(asteroid);
+	return asteroid;
 }
 
 void Asteroid::breakupAsteroid()
