@@ -31,10 +31,18 @@ public:
 
 	void attachNode(GameObject::Ptr object);
 	GameObject::Ptr detachNode(const GameObject& object);
+    
+    void onAsteroidCreated();
+    void onAsteroidDestroyed();
+    void onPlayerDestroyed();
 
 	KinematicSystem kinematicSystem;
 	CollisionSystem collisionSystem;
 private:
+    void nextLevel();
+    
+    uint_t mAsteroids;
+    uint_t mLevel;
 	GameObject mRoot;
 	sf::RenderWindow mWindow;
 	sf::FloatRect mPlayBounds;
