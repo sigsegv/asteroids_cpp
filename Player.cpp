@@ -4,6 +4,7 @@
 #include "KinematicBody.hpp"
 #include "CollisionSystem.hpp"
 #include "Canon.hpp"
+#include "Asteroid.hpp"
 
 Player::Player() :
 	mRotationSpeed(180.0f),
@@ -59,9 +60,14 @@ void Player::updateCurrent(float elapsedSeconds)
 	}
 }
 
-void Player::onCollision(const Collision& /*collision*/)
+void Player::onCollision(const Collision& collision)
 {
-	
+	GameObject& other = &collision.gameObject1 != this ? collision.gameObject1 : collision.gameObject2;
+	if (typeid(other) == typeid(Asteroid))
+	{
+		markForRemoval();
+		Game::instance->onPlayerDestroyed();
+	}
 }
 
 void Player::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
