@@ -40,6 +40,7 @@ Asteroid::Asteroid(Size size) :
 void Asteroid::onCollision(const Collision& /*collision*/)
 {
 	markForRemoval();
+	Game::instance->onAsteroidDestroyed();
 	if (mSize == Size::large) breakupAsteroid();
 }
 
@@ -99,4 +100,7 @@ void Asteroid::breakupAsteroid()
 	Game::instance->attachNode(std::move(asteroid1));
 	Game::instance->attachNode(std::move(asteroid2));
 	Game::instance->attachNode(std::move(asteroid3));
+	Game::instance->onAsteroidCreated();
+	Game::instance->onAsteroidCreated();
+	Game::instance->onAsteroidCreated();
 }
