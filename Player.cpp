@@ -16,12 +16,9 @@ Player::Player() :
 	collider.reset(new CircleCollider(*this, 10.0));
 	Game::instance->collisionSystem.addCollider(*collider);
 
-	mTexture.loadFromFile("assets/textures/playerShip1_green.png");
-	mSprite.setTexture(mTexture);
-	sf::FloatRect bounds = mSprite.getLocalBounds();
-	const float scale = calcScaleFactor<float>(bounds, { 0.0, 0.0, 20.0, 20.0 });
-	setOrigin(bounds.width / 2.f, bounds.height / 2.f);
-	setScale({ scale, scale });
+    spriteInit("assets/textures/playerShip1_green.png", { 0.0, 0.0, 20.0, 20.0 });
+
+    sf::FloatRect bounds = mSprite.getLocalBounds();
 	setPosition(Game::instance->getBounds().width / 2.0f, Game::instance->getBounds().height / 2.0f);
 
 	Cannon::Ptr cannon(new Cannon());
