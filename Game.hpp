@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <array>
 #include <SFML/Graphics.hpp>
 #include "Scab.hpp"
 #include "KinematicSystem.hpp"
@@ -10,6 +11,8 @@
 class Game
 {
 public:
+    enum class Layer { backDrop, backGround, middleGround, foreGround, userInterface, layerCount };
+    
 	static Game* instance;
 
 	Game();
@@ -29,7 +32,7 @@ public:
 	 */
 	sf::Vector2f warpAround(const sf::Vector2f& position) const;
 
-	void attachNode(GameObject::Ptr object);
+	void attachNode(GameObject::Ptr object, Layer layer);
 	GameObject::Ptr detachNode(const GameObject& object);
     
     void onAsteroidCreated();
@@ -43,6 +46,7 @@ private:
     
     uint_t mAsteroids;
     uint_t mLevel;
+    std::array<GameObject*, static_cast<size_t>(Layer::layerCount)> mLayers;
 	GameObject mRoot;
 	sf::RenderWindow mWindow;
 	sf::FloatRect mPlayBounds;

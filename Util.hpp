@@ -26,18 +26,31 @@ float calcDistance(const sf::Vector2<T>& a, const sf::Vector2<T>& b)
 	const sf::Vector2<T> delta(b - a);
 	return std::sqrt(delta.x * delta.x + delta.y * delta.y);
 }
+template<typename T>
+size_t SizeT(T v)
+{
+    return static_cast<size_t>(v);
+}
 
 template<typename T>
 unsigned int UInt(T v)
 {
 	return static_cast<unsigned int>(v);
 }
+
 template<typename T>
 unsigned int Float(T v)
 {
 	return static_cast<float>(v);
 }
+
 #ifdef _DEBUG
+inline size_t SizeT(int v)
+{
+    assert(v >= 0);
+    assert(v <= std::numeric_limits<size_t>::max());
+    return static_cast<size_t>(v);
+}
 inline unsigned int UInt(float v)
 {
 	assert(v >= 0.0);
