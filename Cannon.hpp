@@ -3,10 +3,10 @@
 #include "Scab.hpp"
 #include "GameObject.hpp"
 
-class Canon : public GameObject
+class Cannon : public GameObject
 {
 public:
-	Canon();
+	Cannon();
 protected:
 	virtual void updateCurrent(float elapsedSeconds) override;
 private:

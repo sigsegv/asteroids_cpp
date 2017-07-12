@@ -1,16 +1,16 @@
-#include "Canon.hpp"
+#include "Cannon.hpp"
 #include "Game.hpp"
 #include "Projectile.hpp"
 
-const float Canon::sCoolDown = 0.25;
-const float Canon::sVelocity = 500.0;
+const float Cannon::sCoolDown = 0.25;
+const float Cannon::sVelocity = 500.0;
 
-Canon::Canon() :
+Cannon::Cannon() :
 	mCoolDown(0.0)
 {
 }
 
-void Canon::updateCurrent(float elapsedSeconds)
+void Cannon::updateCurrent(float elapsedSeconds)
 {
 	if (mCoolDown > 0.0)
 	{

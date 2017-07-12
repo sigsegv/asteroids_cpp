@@ -3,7 +3,7 @@
 #include "Util.hpp"
 #include "KinematicBody.hpp"
 #include "CollisionSystem.hpp"
-#include "Canon.hpp"
+#include "Cannon.hpp"
 #include "Asteroid.hpp"
 
 Player::Player() :
@@ -24,9 +24,9 @@ Player::Player() :
 	setScale({ scale, scale });
 	setPosition(Game::instance->getBounds().width / 2.0f, Game::instance->getBounds().height / 2.0f);
 
-	Canon::Ptr canon(new Canon());
-	canon->setPosition(bounds.width / 2.f, -bounds.height / 2.f); // place canon at nose
-	attachNode(std::move(canon));
+	Cannon::Ptr cannon(new Cannon());
+	cannon->setPosition(bounds.width / 2.f, -bounds.height / 2.f); // place canon at nose
+	attachNode(std::move(cannon));
 }
 
 Player::~Player()
