@@ -1,3 +1,7 @@
+laserRed06.png
+meteorGrey_big1.png
+meteorGrey_small2.png
+playerShip1_green.png
 
 ###############################################################################
 
@@ -12,3 +16,8 @@
 	Credit (Kenney or www.kenney.nl) would be nice but is not mandatory.
 
 ###############################################################################
+
+Starbasesnow.png
+
+author: LuminousDragonGames
+https://opengameart.org/content/perfectly-seamless-night-sky
