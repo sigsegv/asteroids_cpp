@@ -32,7 +32,7 @@ void Game::run()
 	mPlayBounds.height = Float(mWindow.getSize().y);
 
 	Player::Ptr player(new Player());
-	mRoot.attachNode(std::move(player));
+    attachNode(std::move(player), Game::Layer::middleGround);
 
     nextLevel();
 
