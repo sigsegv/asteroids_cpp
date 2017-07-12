@@ -17,6 +17,12 @@ Game::Game() :
     mLevel(0)
 {
 	instance = this;
+    for(std::size_t i = 0; i < SizeT(Layer::layerCount); ++i)
+    {
+        GameObject::Ptr layer(new GameObject());
+        mLayers[i] = layer.get();
+        mRoot.attachNode(std::move(layer));
+    }
 }
 
 void Game::run()
@@ -106,9 +112,9 @@ sf::Vector2f Game::warpAround(const sf::Vector2f & position) const
 	return position;
 }
 
-void Game::attachNode(GameObject::Ptr object)
+void Game::attachNode(GameObject::Ptr object, Layer layer)
 {
-	mRoot.attachNode(std::move(object));
+    mLayers[SizeT(layer)]->attachNode(std::move(object));
 }
 
 GameObject::Ptr Game::detachNode(const GameObject & object)

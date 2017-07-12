@@ -97,9 +97,9 @@ void Asteroid::breakupAsteroid()
 
 	Asteroid::Ptr asteroid3 = createAsteroid(position + d3, kinematicBody->velocity + v3, rotational_velocity, Asteroid::Size::small);
 
-	Game::instance->attachNode(std::move(asteroid1));
-	Game::instance->attachNode(std::move(asteroid2));
-	Game::instance->attachNode(std::move(asteroid3));
+    Game::instance->attachNode(std::move(asteroid1), Game::Layer::middleGround);
+	Game::instance->attachNode(std::move(asteroid2), Game::Layer::middleGround);
+	Game::instance->attachNode(std::move(asteroid3), Game::Layer::middleGround);
 	Game::instance->onAsteroidCreated();
 	Game::instance->onAsteroidCreated();
 	Game::instance->onAsteroidCreated();

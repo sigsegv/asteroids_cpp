@@ -33,7 +33,7 @@ void Canon::updateCurrent(float elapsedSeconds)
 			const sf::Vector2f direction = transform.transformPoint({ 0.0, -1.0 });
 			const sf::Vector2f velocity = parentVelocity + (direction * sVelocity);
 			projectile->kinematicBody->velocity = velocity;
-			Game::instance->attachNode(std::move(projectile));
+            Game::instance->attachNode(std::move(projectile), Game::Layer::middleGround);
 			mCoolDown = sCoolDown;
 		}
 	}
