@@ -10,13 +10,7 @@ Projectile::Projectile()
 	collider.reset(new CircleCollider(*this, 2.0));
 	Game::instance->collisionSystem.addCollider(*collider);
 
-	assert(mTexture.loadFromFile("assets/textures/laserRed06.png"));
-	mSprite.setTexture(mTexture);
-
-	sf::FloatRect bounds = mSprite.getLocalBounds();
-	const float scale = calcScaleFactor<float>(bounds, { 0.0, 0.0, 4.0, 4.0 });
-	setOrigin(bounds.width / 2.f, bounds.height / 2.f);
-	setScale({ scale, scale });
+    spriteInit("assets/textures/laserRed06.png", { 0.0, 0.0, 4.0, 4.0 });
 }
 
 void Projectile::onCollision(const Collision& /*collision*/)

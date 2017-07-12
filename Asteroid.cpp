@@ -5,29 +5,26 @@
 
 namespace
 {
-constexpr real_t GameSizeSmall = 15.0;
-constexpr real_t GameSizeLarge = 50.0;
+constexpr real_t GameSizeSmall = 15.0f;
+constexpr real_t GameSizeLarge = 50.0f;
 }
 
 Asteroid::Asteroid(Size size) :
 	mSize(size)
 {
-	float gameSize = 1.0;
+	float gameSize = 1.0f;
+    std::string filepath;
 	if (size == Asteroid::Size::small)
 	{
-		mTexture.loadFromFile("assets/textures/meteorGrey_small2.png");
+		filepath = "assets/textures/meteorGrey_small2.png";
 		gameSize = GameSizeSmall;
 	}
 	else
 	{
-		mTexture.loadFromFile("assets/textures/meteorGrey_big1.png");
+		filepath = "assets/textures/meteorGrey_big1.png";
 		gameSize = GameSizeLarge;
 	}
-	mSprite.setTexture(mTexture);
-	sf::FloatRect bounds = mSprite.getLocalBounds();
-	const float scale = calcScaleFactor<float>(bounds, { 0.0f, 0.0f, gameSize, gameSize });
-	setOrigin(bounds.width / 2.f, bounds.height / 2.f);
-	setScale({ scale, scale });
+    spriteInit(filepath, {0.0f, 0.0f, gameSize, gameSize});
 
 	kinematicBody.reset(new KinematicBody(*this));
 	Game::instance->kinematicSystem.addBody(*kinematicBody);

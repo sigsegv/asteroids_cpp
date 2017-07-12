@@ -4,9 +4,9 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "Scab.hpp"
-#include "GameObject.hpp"
+#include "SpriteObject.hpp"
 
-class Player : public GameObject
+class Player : public SpriteObject
 {
 public:
 	Player();
@@ -19,6 +19,4 @@ protected:
 private:
 	float mRotationSpeed;
 	float mMainThruster;
-	sf::Sprite mSprite;
-	sf::Texture mTexture;
 };

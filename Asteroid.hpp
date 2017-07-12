@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Scab.hpp"
-#include "GameObject.hpp"
+#include "SpriteObject.hpp"
 
-class Asteroid : public GameObject
+class Asteroid : public SpriteObject
 {
 public:
 	enum class Size { small, large };
@@ -18,8 +18,6 @@ protected:
 	virtual void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
 private:
 	const Size mSize;
-	sf::Texture mTexture;
-	sf::Sprite mSprite;
 
 	void breakupAsteroid();
 };
