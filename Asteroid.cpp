@@ -49,12 +49,6 @@ void Asteroid::updateCurrent(float /*elapsedSeconds*/)
 	}
 }
 
-void Asteroid::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
-{
-	states.transform *= getTransform();
-	target.draw(mSprite, states);
-}
-
 Asteroid::Ptr Asteroid::createAsteroid(const sf::Vector2f& position, const sf::Vector2f& velocity, real_t rotational_velocity, Asteroid::Size sz)
 {
 	Asteroid::Ptr asteroid(new Asteroid(sz));

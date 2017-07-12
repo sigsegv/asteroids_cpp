@@ -5,11 +5,6 @@
 #include "Util.hpp"
 #include "Math.h"
 
-namespace
-{
-
-}
-
 Game* Game::instance = 0;
 
 Game::Game() :
@@ -32,9 +27,14 @@ void Game::run()
 	mPlayBounds.height = Float(mWindow.getSize().y);
 
 	Player::Ptr player(new Player());
+    player->setPosition(mPlayBounds.width / 2.0f, mPlayBounds.height / 2.0f);
     attachNode(std::move(player), Game::Layer::middleGround);
+    
+    SpriteObject::Ptr backdrop(new SpriteObject("assets/textures/Starbasesnow.png", mPlayBounds));
+    backdrop->setPosition(mPlayBounds.width / 2.f, mPlayBounds.height / 2.f);
+    attachNode(std::move(backdrop), Game::Layer::backDrop);
 
-    nextLevel();
+    //nextLevel();
 
 	sf::Clock clock;
 	sf::Time kTimePerFrame = sf::milliseconds(17); // 60 FPS

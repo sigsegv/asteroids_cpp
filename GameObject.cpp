@@ -25,7 +25,7 @@ GameObject::~GameObject()
 void GameObject::attachNode(Ptr child)
 {
 	child->mParent = this;
-	mChildren.push_front(std::move(child));
+	mChildren.push_back(std::move(child));
 }
 
 GameObject::Ptr GameObject::detachNode(const GameObject & child)

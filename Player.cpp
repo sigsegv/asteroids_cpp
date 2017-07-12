@@ -19,8 +19,6 @@ Player::Player() :
     spriteInit("assets/textures/playerShip1_green.png", { 0.0, 0.0, 20.0, 20.0 });
 
     sf::FloatRect bounds = mSprite.getLocalBounds();
-	setPosition(Game::instance->getBounds().width / 2.0f, Game::instance->getBounds().height / 2.0f);
-
 	Cannon::Ptr cannon(new Cannon());
 	cannon->setPosition(bounds.width / 2.f, -bounds.height / 2.f); // place canon at nose
 	attachNode(std::move(cannon));
@@ -65,10 +63,4 @@ void Player::onCollision(const Collision& collision)
 		markForRemoval();
 		Game::instance->onPlayerDestroyed();
 	}
-}
-
-void Player::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
-{
-	states.transform *= getTransform();
-	target.draw(mSprite, states);
 }

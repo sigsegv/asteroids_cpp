@@ -15,7 +15,6 @@ public:
 	static Ptr createAsteroid(const sf::Vector2f& position, const sf::Vector2f& velocity, real_t rotational_velocity, Asteroid::Size sz);
 protected:
 	virtual void updateCurrent(float elapsedSeconds) override;
-	virtual void drawCurrent(sf::RenderTarget &target, sf::RenderStates states) const override;
 private:
 	const Size mSize;
 

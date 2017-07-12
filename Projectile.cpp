@@ -25,9 +25,3 @@ void Projectile::updateCurrent(float elapsedSeconds)
 		markForRemoval();
 	}
 }
-
-void Projectile::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
-{
-	states.transform *= getTransform();
-	target.draw(mSprite, states);
-}
