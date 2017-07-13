@@ -26,6 +26,17 @@ float calcDistance(const sf::Vector2<T>& a, const sf::Vector2<T>& b)
 	const sf::Vector2<T> delta(b - a);
 	return std::sqrt(delta.x * delta.x + delta.y * delta.y);
 }
+
+inline unsigned int hashString(const std::string& str)
+{
+    unsigned int hash = 13;
+    for(const char& c : str)
+    {
+        hash = hash * 37 + c;
+    }
+    return hash;
+}
+
 template<typename T>
 size_t SizeT(T v)
 {

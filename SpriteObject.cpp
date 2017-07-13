@@ -1,6 +1,7 @@
 #include "SpriteObject.hpp"
 #include <cassert>
 #include "Util.hpp"
+#include "ResourceManager.hpp"
 
 SpriteObject::SpriteObject()
 {
@@ -14,8 +15,7 @@ SpriteObject::SpriteObject(const std::string& filename, const sf::Rect<float>& d
 
 void SpriteObject::spriteInit(const std::string& filename, const sf::Rect<float>& desiredDimensions)
 {
-    assert(mTexture.loadFromFile(filename));
-    mSprite.setTexture(mTexture);
+    mSprite.setTexture(ResourceManager::instance->getTextureFromFile(filename));
     
     sf::FloatRect bounds = mSprite.getLocalBounds();
     const float scale = calcScaleFactor<float>(bounds, desiredDimensions);

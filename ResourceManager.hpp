@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <unordered_map>
 #include <SFML/Graphics.hpp>
 
 /**
@@ -9,19 +10,16 @@
 class ResourceManager
 {
 public:
-	static ResourceManager& instance();
+	static ResourceManager* instance;
+    
+    ResourceManager();
 
-	sf::Texture& getTexture(int id);
-	sf::Image& getImage(int id);
+    sf::Texture& getTextureFromFile(const std::string& filename);
 private:
-	//static ResourceManager* sInstance;
-	//static sf::Mutex sMutex;
 
 	using TexturePtr = std::unique_ptr<sf::Texture>;
-	using ImagePtr = std::unique_ptr<sf::Texture>;
 
-	TexturePtr loadTexture(int id);
+	TexturePtr loadTextureFromFile(const std::string& filename);
 	
-	std::map<int, TexturePtr> mTextures;
-	std::map<int, ImagePtr> mImages;
+	std::unordered_map<unsigned int, TexturePtr> mTextures;
 };
