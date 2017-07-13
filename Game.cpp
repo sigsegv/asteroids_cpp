@@ -2,6 +2,7 @@
 #include <random>
 #include "Player.hpp"
 #include "Asteroid.hpp"
+#include "ResourceManager.hpp"
 #include "Util.hpp"
 #include "Math.h"
 
@@ -22,6 +23,8 @@ Game::Game() :
 
 void Game::run()
 {
+    ResourceManager resourceManager;
+    
 	mWindow.create(sf::VideoMode(768, 576), "SFML Application");
 	mPlayBounds.width = Float(mWindow.getSize().x);
 	mPlayBounds.height = Float(mWindow.getSize().y);

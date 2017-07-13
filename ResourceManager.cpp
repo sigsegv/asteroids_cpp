@@ -1,23 +1,27 @@
 #include "ResourceManager.hpp"
+#include <cassert>
+#include "Util.hpp"
 
-//ResourceManager & ResourceManager::instance()
-//{
-//	sf::Lock lock(sMutex);
-//	if (!sInstance) sInstance = new ResourceManager();
-//	return *sInstance;
-//}
+ResourceManager* ResourceManager::instance = 0;
 
-//sf::Texture & ResourceManager::getTexture(int id)
-//{
-//	sf::Lock lock(sMutex);
-//	auto found = mTextures.find(id);
-//	if (found == mTextures.end())
-//	{
-//		
-//	}
-//}
+ResourceManager::ResourceManager()
+{
+    ResourceManager::instance = this;
+}
 
-//ResourceManager::TexturePtr ResourceManager::loadTexture(int id)
-//{
-//	
-//}
+sf::Texture& ResourceManager::getTextureFromFile(const std::string& filename)
+{
+    unsigned int hash = hashString(filename);
+    if(!mTextures.count(hash))
+    {
+        mTextures[hash] = loadTextureFromFile(filename);
+    }
+    return *mTextures[hash].get();
+}
+
+ResourceManager::TexturePtr ResourceManager::loadTextureFromFile(const std::string& filename)
+{
+    TexturePtr texture = std::make_unique<sf::Texture>();
+    if(!texture->loadFromFile(filename)) throw std::runtime_error("[ERROR] Failed to load " + filename);
+    return texture;
+}
